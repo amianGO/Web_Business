@@ -8,19 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.store.store.Entities.Product;
 import com.store.store.Entities.ProductCategory;
+import com.store.store.Services.CartService;
 import com.store.store.Services.ProductService;
 
 @Controller
 @RequestMapping("/products")
+@SessionAttributes("cart")
 public class productController {
 
     @Autowired
     private ProductService productService;
+
+    @ModelAttribute("cart")
+    public CartService initializeCart(){
+        return new CartService();
+    }
 
     @GetMapping
     public String showProducts(
@@ -28,7 +37,8 @@ public class productController {
         @RequestParam(name = "name", required = false) String name,
         @RequestParam(name = "price", required = false) Double price,
         @RequestParam(name = "category",required = false) String category,
-        Model model
+        Model model,
+        @ModelAttribute("cart") CartService cartService
     ){
         List<Product> products;
 
@@ -57,6 +67,7 @@ public class productController {
         
         model.addAttribute("products", products);
         model.addAttribute("categories", Arrays.asList(ProductCategory.values())); //Enviar todas las categorias
+        model.addAttribute("cartItems", cartService.showItems());
         return "products";
     }
     

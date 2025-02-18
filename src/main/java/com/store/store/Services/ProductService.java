@@ -24,7 +24,12 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    //Metodo para Buscar por ID
+    //Metodo para Buscar Por ID
+    public Product findProductById(Long id){
+        return productRepository.findById(id).orElse(null);
+    }
+
+    //Metodo para Borrar por ID
     public void deleteById(Long id){
         productRepository.deleteById(id);
     }

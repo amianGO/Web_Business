@@ -1,0 +1,22 @@
+<div th:fragment="cart-sidebar">
+    <!-- Sidebar del carrito -->
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Carrito de Compras</h3>
+            <button class="close-btn" onclick="toggleCart()">✖</button>
+        </div>
+        <ul class="cart-items">
+            <li th:each="item : ${cartItems}">
+                <span th:text="${item.product.name}"></span> - 
+                <span th:text="${item.quantity}"></span>
+            </li>
+        </ul>
+        <div class="cart-footer">
+            <button class="btn btn-danger">Vaciar Carrito</button>
+            <button class="btn btn-success">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Botón para abrir el carrito -->
+    <button class="cart-toggle-btn" onclick="toggleCart()">🛒 Ver Carrito</button>
+</div>

@@ -26,7 +26,7 @@ public class Product {
     //Añadimos los Atributos de la clase productos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "Nombre")
     private String name;

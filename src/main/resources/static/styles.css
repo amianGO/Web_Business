@@ -6,3 +6,54 @@
 .card{
     transition: 0.3s ease-in-out, box-shadow 0.3s ease-in-out;  /*Transicion Suave*/
 }
+
+/*Side bar del carrito*/
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0,0.2);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+/*Cuando el carrito esta activo*/
+.cart-sidebar.active{
+    right: 0;
+}
+
+/*Cabecera del carrito*/
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/*Boton de Cerrar*/
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/*Boton para abrir el carrito*/
+.cart-toggle-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0,0.2);
+}
