@@ -17,7 +17,9 @@
             </li>
         </ul>
         <div class="cart-footer">
-            <button class="btn btn-danger">Vaciar Carrito</button>
+            <form th:action = "@{/cart/removeAll}" method="post">
+                <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
+            </form>
             <button class="btn btn-success">Finalizar Compra</button>
         </div>
     </div>
