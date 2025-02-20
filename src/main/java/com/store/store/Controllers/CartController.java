@@ -62,7 +62,13 @@ public class CartController{
     public String debugCart(@ModelAttribute("cart") CartService cartService){
         return "Productos en el carrito: " + cartService.showItems().size();
     }
-    
 
+    //Metodo para eliminar item del carrito
+    @PostMapping("/cart/remove") //Actualizacion de estado (Thymeleaf no reconoce @DelteMapping)
+    public String deleteItem(@RequestParam("id") Long productId,@ModelAttribute("cart") CartService cartService){
+        cartService.removeItem(productId);
+        return "redirect:/products";
+    }
+    
 
 }
