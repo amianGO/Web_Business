@@ -9,6 +9,11 @@
             <li th:each="item : ${cartItems}">
                 <span th:text="${item.product.name}"></span> - 
                 <span th:text="${item.quantity}"></span>
+
+                <form th:action = "@{/cart/remove}" method="post">
+                    <input type="hidden" name="id" th:value="${item.product.id}">
+                    <button type="submit" class="btn btn-danger btn-sm">X</button>
+                </form>
             </li>
         </ul>
         <div class="cart-footer">
