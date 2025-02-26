@@ -69,6 +69,12 @@ public class CartController{
         cartService.removeItem(productId);
         return "redirect:/products";
     }
+
+    @PostMapping("/cart/removeAll")
+    public String delelteAllItems(@ModelAttribute("cart") CartService cartService){
+        cartService.clear();
+        return "redirect:/products";
+    }
     
 
 }
