@@ -1,29 +1,55 @@
 <div th:fragment="cart-sidebar">
-    <!-- Sidebar del carrito -->
-    <div id="cartSidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Carrito de Compras</h3>
-            <button class="close-btn" onclick="toggleCart()">✖</button>
-        </div>
-        <ul class="cart-items">
-            <li th:each="item : ${cartItems}">
-                <span th:text="${item.product.name}"></span> - 
-                <span th:text="${item.quantity}"></span>
+    <!-- Botón para abrir el carrito -->
+    <button class="fixed bottom-5 left-5 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition"
+        onclick="toggleCart()">
+        <span class="material-symbols-outlined text-3xl">shopping_cart</span>
+    </button>
 
-                <form th:action = "@{/cart/remove}" method="post">
+    <!-- Sidebar del carrito -->
+    <div id="cartSidebar"
+        class="fixed top-0 left-0 h-full w-4/12 max-w-lg bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 p-4 flex flex-col z-50
+               sm:w-8/12 md:w-6/12 lg:w-4/12">
+        <div class="flex justify-between items-center border-b pb-2">
+            <h3 class="text-lg font-semibold">Carrito de Compras</h3>
+            <button class="text-gray-500 hover:text-red-500 text-2xl" onclick="toggleCart()">
+                <span class="material-symbols-outlined">close_small</span>
+            </button>
+        </div>
+
+        <!-- Lista de productos en el carrito -->
+        <ul class="cart-items flex-1 overflow-y-auto mt-4">
+            <li th:each="item : ${cartItems}" class="flex justify-between items-center py-2 border-b">
+                <span th:text="${item.product.name}" class="text-gray-800"></span>
+                <span th:text="${item.quantity}" class="text-gray-600"></span>
+
+                <form th:action="@{/cart/remove}" method="post">
                     <input type="hidden" name="id" th:value="${item.product.id}">
-                    <button type="submit" class="btn btn-danger btn-sm">X</button>
+                    <button type="submit" class="text-red-500 hover:text-red-700 text-xl">
+                        <span class="material-symbols-outlined">disabled_by_default</span>
+                    </button>
                 </form>
             </li>
         </ul>
-        <div class="cart-footer">
-            <form th:action = "@{/cart/removeAll}" method="post">
-                <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
+
+        <!-- Footer del carrito -->
+        <div class="cart-footer mt-4">
+            <form th:action="@{/cart/removeAll}" method="post" class="mb-2">
+                <button type="submit"
+                    class="w-full bg-orange-400 text-white py-2 rounded-lg hover:bg-orange-500 transition">
+                    <span class="material-symbols-outlined align-middle">shopping_cart_off</span> Vaciar Carrito
+                </button>
             </form>
-            <button class="btn btn-success">Finalizar Compra</button>
+            <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+                <span class="material-symbols-outlined align-middle">shopping_bag</span> Finalizar Compra
+            </button>
         </div>
     </div>
-
-    <!-- Botón para abrir el carrito -->
-    <button class="cart-toggle-btn" onclick="toggleCart()">🛒 Ver Carrito</button>
 </div>
+
+<!-- Script para abrir/cerrar el carrito -->
+<script>
+    function toggleCart() {
+        const sidebar = document.getElementById('cartSidebar');
+        sidebar.classList.toggle('-translate-x-full');
+    }
+</script>
