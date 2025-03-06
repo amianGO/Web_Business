@@ -11,3 +11,11 @@ INSERT INTO Producto (Nombre, Precio, Descripcion, Codigo, Categoria, Imagen) VA
 ('Detergente en Polvo', 4.50, 'Detergente multiuso para ropa 2kg', 1008, 'CUIDADO_DEL_HOGAR', '/images/detergente.jpg'),
 ('Pechuga de Pollo', 6.75, 'Pechuga de pollo sin hueso 1kg', 1009, 'FRESCOS', '/images/pollo.jpg'),
 ('Helado de Chocolate', 3.99, 'Helado de chocolate cremoso 500ml', 1010, 'CONGELADOS', '/images/helado.jpg');
+
+INSERT INTO roles (id, name) VALUES (1, 'ADMIN'),(2,'USER');
+
+
+INSERT INTO usuarios (id, username, password) VALUES (1, 'admin', '$2a$10$Mv4/4Zbx4kYzYjrM05wRs.XmJMl29gEg1gvqjIIcsqR.nKh8qrtMG');
+INSERT INTO usuarios (id, username, password) VALUES (2, 'user', '$2a$10$Mv4/4Zbx4kYzYjrM05wRs.XmJMl29gEg1gvqjIIcsqR.nKh8qrtMG');
+
+ALTER TABLE usuarios DROP COLUMN passwords;

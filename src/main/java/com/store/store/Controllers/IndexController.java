@@ -28,6 +28,11 @@ public class IndexController {
         return "home";
     }
 
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+
     @GetMapping("/Products")
     public String showProductPage(Model model){
         List<Product> products = productService.findProducts();
@@ -39,5 +44,6 @@ public class IndexController {
     public List<CartItem> getCartItems(@ModelAttribute("cart") CartService cartService){
         return cartService.showItems();
     }
+
    
 }
