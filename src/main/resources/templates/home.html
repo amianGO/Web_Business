@@ -28,7 +28,19 @@
             <a href="/Products" class="hover:text-cyan-100 transition-colors duration-300">Productos</a>
             <a href="#" class="hover:text-cyan-100 transition-colors duration-300">Servicios</a>
             <a href="#" class="hover:text-cyan-100 transition-colors duration-300">Contacto</a>
-          </div>
+            <!-- Si el usuario no esta autenticado, mostrar el texto de Inicio de Sesion-->
+            <a th:if="${username == null}" href="/login" class="hover:text-cyan-100 transition-colors duration-300">Inciar Sesion</a>
+
+            <!-- Si el usuario está autenticado, mostrar su nombre y formulario de logout -->
+            <div th:if="${username != null}" class="flex items-center space-x-4">
+                <span class="text-white">Bienvenido, <span th:text="${username}"></span></span>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Cerrar Sesion
+                    </button>
+                </form>
+            </div>
+        </div>
 
           <!-- Menu Mobile -->
           <div class="md:hidden">

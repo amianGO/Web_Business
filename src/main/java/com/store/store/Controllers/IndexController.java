@@ -3,6 +3,8 @@ package com.store.store.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +26,23 @@ public class IndexController {
     private ProductService productService;
 
     @GetMapping("/")
-    public String showHomerPage(){
+    public String showHomerPage(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //Inicializamos la interfaz de Spring que nos permitira verificar las autenticaciones
+
+        if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
+            model.addAttribute("username", authentication.getName());
+        } else {
+            model.addAttribute("username", null);
+        }
         return "home";
     }
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage(Authentication authentication){
+        if (authentication != null && authentication.isAuthenticated()) { //Si la autenticacion existe y esta autenticado, retornamos la misma pagina
+            return "redirect:/";
+        }
         return "login";
     }
 
